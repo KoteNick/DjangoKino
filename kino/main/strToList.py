@@ -8,7 +8,6 @@ def strToList(string: str) -> list:
 
 def listToStr(l: list, nospaces = False) -> str:
     s = str(l)
-    print(s)
     if nospaces:
         s = s.replace(' ', '')
     return s[1:-1]

@@ -13,15 +13,36 @@ class HomePageView(ListView):
     template_name = 'home.html'
     context_object_name = 'films'
 
+def now():
+    return datetime.now().time()
+
+def reset():
+    films = Film.objects.all()
+    halls = Hall.objects.all()
+    for film in films:
+        if (now() > film.timeEnd):
+            film.done = True
+            film.save()
+        else:
+            film.done=False
+            film.save()
+        for hall in halls:
+            if hall.number == film.hall:
+                if (now()<film.timeEnd and now()> film.time):
+                    hall.in_use = True
+                    hall.save()
+                elif now()>film.timeEnd and hall.in_use:
+                    hall.in_use = False
+                    hall.seats = "0"
+                    hall.save()
+
 def home(request):
   films = Film.objects.all()
   fs = []
+  reset()
   for film in films:
-      if (film.time > datetime.now().time()):
+      if (not film.done):
         fs.append(film)
-  print(films[0])
-  print(datetime.now())
-  print(films[0].time > datetime.now().time())
   template = loader.get_template('home.html')
   context = {
     'films': fs,
@@ -30,6 +51,7 @@ def home(request):
   return HttpResponse(template.render(context, request))
 
 def hall(request, num):
+    reset()
     template = loader.get_template('hall.html')
     seats = []
     halls = Hall.objects.all()
@@ -47,11 +69,19 @@ def hall(request, num):
     taken = []
     for i in t:
         taken.append(str(i))
+    films = Film.objects.all()
+    fs = Film
+    for film in films:
+        if (film.hall == num):
+            if (not film.done and now()<film.timeEnd):
+                print(film.title)
+                fs = film
     context = {
         'num': str(num),
         'numz': seats,
         'hall': hall,
-        'taken': taken
+        'taken': taken,
+        'film': fs
     }
     if (request.method == 'POST'):
         cur_seats = strToList.strToList(hall.seats)
@@ -59,5 +89,6 @@ def hall(request, num):
         print(cur_seats)
         hall.seats = strToList.listToStr(cur_seats, True)
         hall.save()
-        return redirect(f"/hall{num}")
+        #return redirect(f"/hall{num}")
+        return redirect("/")
     return HttpResponse(template.render(context, request))

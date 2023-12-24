@@ -4,10 +4,17 @@
 {% endblock %}
 
 {% block content %}
+<h1>Зала №{{num}}</h1>
+<h2>Фільм: {{film.title}}</h2>
+<h2>Ціна: {{film.price}}</h2>
+{% if film.in_progress %}
+    <h2>СЕАНС ІДЕ</h2>
+{% endif %}
 <form method="post">
     {% csrf_token %}
 <div class="hall">
     <div>
+        <span class="screen">ЕКРАН</span>
     {% for row in "12345" %}
         <div class="row">
             {% for col in numz %}
@@ -15,7 +22,7 @@
                     {% if seat|slice:"1:4" in taken %}
                     <input type="submit" value="{{row}}{{col}}" class="taken" name="s" disabled>
                     {% else %}
-                    <input type="submit" value="{{row}}{{col}}" name="s">
+                    <input type="submit" value="{{row}}{{col}}" name="s" {% if film.in_progress %} disabled {% endif %}>
                     {% endif  %}
                 {% endwith %}
 

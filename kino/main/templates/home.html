@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 {% block title %}
-   Films
+   Афіша на сьогодні
 {% endblock %}
 
 {% block content %}
@@ -9,7 +9,12 @@
   <div class="filmbox">
     <div class="filmimg"><img src="{{ MEDIA_URL }}{{ film.image.url }}" height="100%"></div>
     <div class="filmdata"><h2>{{ film.title }}</h2>
-      <p>{{film.time}}</p>
+      <p>{{film.time|time:"H:i"}} - {{film.timeEnd|time:"H:i"}}</p>
+      {% if film.in_progress %}
+    СЕАНС ПОЧАВСЯ
+{% endif %}
+      <p>Ціна: {{film.price}} ГРН</p>
+      <br>
       <a href="./hall{{film.hall}}">Зала № {{film.hall}}</a>
     </div>
   </div>
