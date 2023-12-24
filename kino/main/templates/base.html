@@ -1,0 +1,18 @@
+{% load static %}
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="shortcut icon" type="image/x-icon" href="{% static 'logo.png' %}" />
+    <title>{% block title %}{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+</head>
+<body>
+  <header>
+    <img src="{% static 'logo.png' %}" height="100%">
+    <a href="{% url 'home' %}">Афіша</a>
+  </header>
+    {% block content %}
+    {% endblock %}
+</body>
+</html>

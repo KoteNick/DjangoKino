@@ -1,0 +1,85 @@
+html {
+    background-color: #1e1e1e;
+    color: white;
+    font-family: Arial;
+    scroll-behavior: smooth;
+}
+* {
+  margin: 0;
+  padding: 0;
+}
+a {
+  color: white;
+  text-decoration: none;
+  border-bottom: 0px solid white;
+  transition: all.3s ease;
+}
+a:hover {
+  border-bottom: 2px solid white;
+  transition: all.3s ease;
+}
+header, footer {
+  background-color: red;
+  border-radius: 0;
+  border-bottom: 5px solid red;
+  align-items: center;
+  transition: all.3s ease;
+  justify-content: start;
+  align-items: center;
+  display: flex;
+  text-align: center;
+  width: 100%;
+  height: 5%;
+}
+header > *{
+    margin: 10px;
+}
+header > a:hover{
+    margin: 20px;
+}
+.filmbox {
+  background-color: #2e2e2e;
+  display: flex;
+  width: 50%;
+  margin: 3%;
+  height: 50%;
+}
+.filmdata>h2{
+  padding: 2%;
+}
+
+.filmimg {
+  margin: 10px;
+}
+
+.filmdata:first-child {
+
+}
+body > h1 {
+  margin: 1%;
+}
+
+.hall {
+    height: 90vh;
+    width: 100%;
+    align-items: center;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  text-align: center;
+}
+.hall > div{
+display:grid;
+}
+
+.row {
+  display: grid;
+  grid-template-columns: repeat(20, 1fr);
+
+  grid-auto-rows: 5vh;
+}
+input {
+padding: 1vh;}
+.taken {
+color: black;
+background-color: red;}

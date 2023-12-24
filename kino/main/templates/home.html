@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block title %}
+   Films
+{% endblock %}
+
+{% block content %}
+  <h1>{{ day }}</h1>
+  {% for film in films %}
+  <div class="filmbox">
+    <div class="filmimg"><img src="{{ MEDIA_URL }}{{ film.image.url }}" height="100%"></div>
+    <div class="filmdata"><h2>{{ film.title }}</h2>
+      <p>{{film.time}}</p>
+      <a href="./hall{{film.hall}}">Зала № {{film.hall}}</a>
+    </div>
+  </div>
+  {% endfor %}
+
+{% endblock %}

@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block title %}
+   Зала {{num}}
+{% endblock %}
+
+{% block content %}
+<form method="post">
+    {% csrf_token %}
+<div class="hall">
+    <div>
+    {% for row in "12345" %}
+        <div class="row">
+            {% for col in numz %}
+                {% with "a"|add:row|add:""|add:col as seat %}
+                    {% if seat|slice:"1:4" in taken %}
+                    <input type="submit" value="{{row}}{{col}}" class="taken" name="s" disabled>
+                    {% else %}
+                    <input type="submit" value="{{row}}{{col}}" name="s">
+                    {% endif  %}
+                {% endwith %}
+
+            {% endfor %}
+        </div>
+    {% endfor %}
+    </div>
+</div>
+</form>
+{% endblock %}
