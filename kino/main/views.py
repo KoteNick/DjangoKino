@@ -76,6 +76,7 @@ def hall(request, num):
             if (not film.done and now()<film.timeEnd):
                 print(film.title)
                 fs = film
+                break
     context = {
         'num': str(num),
         'numz': seats,
